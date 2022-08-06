@@ -1,0 +1,62 @@
+<!-- <form> -->
+  <div class="back">
+    <button class="btn btn-secondary text-right" (click)="back()">
+      <span class="fa fa-chevron-left"></span>&nbsp;Back</button>
+  </div>
+ 
+  <h2 class="text-success m-3">QUESTION<em> *</em></h2>
+<div>
+  <ckeditor required name="questionData" [config]="CkeditorConfig" [(ngModel)]="questionData" debounce="500"
+    toolbar="emptyToolbar">
+  </ckeditor>
+</div><br>
+
+<div [formGroup]="form">
+<div class="row">
+  <div class="col-md-6">
+    
+      <mat-form-field appearance="fill">
+        <mat-label>Total Score</mat-label>
+        <input matInput  pattern="[0-9]*" min="1" max="50" formControlName="totalScore" required [(ngModel)]="totalScore">
+
+        <div *ngIf="form.get('totalScore')?.hasError('required') &&
+        form.get('totalScore')?.touched">
+              <small class="text-danger" *ngIf="form.get('totalScore')?.hasError('totalScore') &&
+              form.get('totalScore')?.touched">
+                This field is Required
+              </small>
+            </div>
+      </mat-form-field>
+    </div>
+
+  <div class="col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Negative Score</mat-label>
+        <input matInput  pattern="[0-9]*" min="1" max="1"  formControlName="negativeScore" required [(ngModel)]="negativeScore">
+       
+        <div *ngIf="form.get('negativeScore')?.hasError('required') &&
+        form.get('negativeScore')?.touched">
+              <small class="text-danger" *ngIf="form.get('negativeScore')?.hasError('negativeScore') &&
+              form.get('negativeScore')?.touched">
+                This field is Required
+              </small>
+            </div>
+        
+      </mat-form-field>
+  </div>
+</div>
+</div>
+
+
+<div class="modal-footer">
+  <button class="btn btn-success m-2" type="button" [hidden]="edit" (click)="onSubmit()" [disabled]="!form.valid"> <i
+      class="fa fa-check"></i>&nbsp; Submit</button>
+  <button class="btn btn-success" type="button" [hidden]="!edit" [disabled]="!form.valid" (click)="updateQuestion(id, questionData , totalScore , negativeScore)" [disabled]="!form.valid"> <i
+      class="fa fa-check">
+    </i>&nbsp;Update</button> 
+  <button class="btn btn-info" type="button" (click)="resetQuestion()" [disabled]="!form.valid">
+    <i class="fa fa-refresh "></i>&nbsp; Reset</button>
+</div>
+
+
+

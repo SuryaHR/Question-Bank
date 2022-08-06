@@ -1,0 +1,68 @@
+<div *ngIf="data['popupForm'] == 'popupForm'">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h3 class="label-sub-heading">
+        Create Category
+        <button class="btn btn-light close" (click)="close()">
+          <i class="fa fa-times"></i>
+        </button>
+      </h3>
+    </div>
+  </div>
+
+  <form [formGroup]="popupForm">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field class="col-md-12 w-100" appearance="standard">
+            <mat-label for="category">
+              Category
+            </mat-label>
+            <mat-select id="categoryName" [(ngModel)]="categoryName" formControlName="categoryName">
+              <mat-option *ngFor="let option of categoryOptions" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+            <div *ngIf="popupForm.get('categoryName')?.hasError('required') &&
+                popupForm.get('categoryName')?.touched">
+              <small class="text-danger" *ngIf="popupForm.get('categoryName')?.hasError('required') &&
+                  popupForm.get('categoryName')?.touched">
+                This Field is Required
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <mat-label>Description</mat-label>
+        <mat-form-field appearance="outline" class="col-md-12">
+          <textarea matNativeControl id="description" formControlName="description" matInput
+            placeholder="Enter description here"></textarea>
+
+            <div *ngIf="popupForm.get('description')?.hasError('required') &&
+                popupForm.get('description')?.touched">
+              <small class="text-danger" *ngIf="popupForm.get('description')?.hasError('description') &&
+                  popupForm.get('description')?.touched">
+                This field is Required
+              </small>
+            </div>
+        </mat-form-field>
+      </div>
+      <div class="modal-footer pb-0">
+        <div class="row">
+          <div class="col-md-3 m-2">
+            <button type="button" class="btn btn-success save-btn" (click)="saveDetails()" [disabled]="!popupForm.valid || popupForm.pristine">
+              Save
+            </button>
+          </div>
+          <div class="col-md-3 m-2">
+            <button type="button" class="btn btn-info reset-btn" (click)="reset()" [disabled]="!popupForm.valid || popupForm.pristine">
+              Reset
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

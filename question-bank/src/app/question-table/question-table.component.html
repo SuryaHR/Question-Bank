@@ -1,0 +1,56 @@
+<div class="back">
+  <button class="btn btn-secondary text-right" (click)="back()">
+    <span class="fa fa-chevron-left"></span>&nbsp;Back</button>
+</div>
+
+
+<div class="col-md-12 text-right ">
+  <button type="button" class="m-3 btn btn-secondary" (click)="create()"><i class="fa fa-plus-circle"></i>&nbsp;Create
+    Question</button>
+</div>
+
+
+<div *ngIf="questionTableList.length > 0">
+  <!--  -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 col-md-12">
+
+
+    <!-- Sl no Column -->
+    <ng-container matColumnDef="serial">
+      <th mat-header-cell *matHeaderCellDef class="table-header p-3">Sl.No </th>
+      <td mat-cell *matCellDef="let questionsList let i = index;">{{i+1}}</td>
+    </ng-container>
+
+    <!-- Questions Column -->
+    <ng-container matColumnDef="questions">
+      <th mat-header-cell *matHeaderCellDef class="table-header p-3">Questions</th>
+      <td mat-cell *matCellDef="let questionsList"> {{questionsList.questionText}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoryName">
+      <th mat-header-cell *matHeaderCellDef class="table-header p-3">Category</th>
+      <td mat-cell *matCellDef="let questionsList"> {{questionsList.categoryName}} </td>
+    </ng-container>
+
+
+    <!-- Edit Question Column -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef class="table-header p-0">Edit</th>
+      <td mat-cell *matCellDef="let questionsList"> <button class="btn btn-info"
+          (click)="edit(questionsList)">Edit </button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef class="table-header p-0">Delete</th>
+      <td mat-cell *matCellDef="let questionsList"> <button class="btn btn-danger"
+          (click)="delete(questionsList.id)">Delete</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<div class="row-text-center mt-5" *ngIf="questionTableList.length === 0">
+  <h2 class="text-center text-danger">No Questions Available Please add one!</h2>
+</div>

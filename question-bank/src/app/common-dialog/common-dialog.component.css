@@ -1,0 +1,20 @@
+.close {
+    float: right;
+    color: black;
+    opacity: 1;
+}
+
+.modal-footer {
+    border-top-color: #f4f4f4;
+    float: right;
+}
+
+.save-btn {
+    background-color: green;
+    color: white;
+}
+
+.reset-btn {
+    background-color: #c03448 !important;
+    color: white !important;
+}
